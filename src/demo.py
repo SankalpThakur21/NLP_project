@@ -3,10 +3,10 @@ import pickle
 import tensorflow as tf
 from nltk import word_tokenize
 import numpy as np
-model = keras.models.load_model("model.h5", compile=False)
+model = keras.models.load_model("src/model.h5", compile=False)
 model.compile(optimizer = tf.keras.optimizers.Adam(learning_rate=5e-5),loss='categorical_crossentropy',metrics =['accuracy'])
 
-with open("word2index.pkl",'rb') as fp:
+with open("src/word2index.pkl",'rb') as fp:
     word2index = pickle.load(fp)
 
 def getseq(sent):
