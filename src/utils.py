@@ -17,7 +17,7 @@ import nltk
 from nltk.util import pad_sequence
 from nltk import word_tokenize, sent_tokenize
 
-from imblearn.over_sampling import RandomOverSampler, SMOTE ,SVMSMOTE,BorderlineSMOTE,ADASYN
+from imblearn.over_sampling import RandomOverSampler, SMOTE ,BorderlineSMOTE,ADASYN
 
 from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score,  classification_report
 
@@ -25,6 +25,24 @@ from sklearn.metrics import ConfusionMatrixDisplay, accuracy_score,  classificat
 
 samplers = {"Nosampling" : None , "SMOTE" : SMOTE,  "BorderlineSMOTE" : BorderlineSMOTE,"ADASYN" : ADASYN}
 
+def remove_unwanted(mt , ref , avgm , avgg):
+  src = []
+  trans = []
+  fl1 = []
+  fl2 = []
+  for i in range(len(ref)):
+    ref_tok = word_tokenize(ref[i].lower())
+    sent_tok = word_tokenize(mt[i].lower())
+    if len(ref_tok) < 5:
+      continue
+    if len(sent_tok) < 5:
+      continue
+    src.append(ref_tok)
+    trans.append(sent_tok)
+    fl1.append(avgm[i])
+    fl2.append(avgg[i])
+  return src , trans , fl1 ,fl2
+    
 
 def loaddata(path = "data/data.tsv"):
     # read the data
@@ -37,6 +55,7 @@ def loaddata(path = "data/data.tsv"):
 
     X = cdata['Shortening']
     y = np.int32(cdata['fluency'])-1
+    
     return X,y
 
 
