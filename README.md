@@ -22,3 +22,24 @@ place word2index and model file in src folder
 
 run demo.py without any arguments
     python demo.py
+
+also ipynb can be test with dataset at https://www.kaggle.com/datasets/sankalpthakur99/fluency-nlp
+
+
+required lib 
+
+keras
+tensorflow
+numpy
+nltk
+pandas
+tqdm
+sklearn
+scipy
+pickle
+tranformers
+torch
+os
+json
+imblearn
+matlpotlib
